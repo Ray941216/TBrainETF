@@ -1,6 +1,6 @@
 # 台灣ETF價格預測競賽
 隊伍: NCU_newbie
-成員：[陳廷睿](https://github.com/Ray941216/TBrainETF)、[劉亞昇](https://github.com/NepTuNew/TBrain-ETF)、[連丞宥](https://github.com/littlelienpeanut/ETF_prediction)、[曾翊銘](#)
+成員：[陳廷睿](https://github.com/Ray941216/TBrainETF)、[劉亞昇](https://github.com/NepTuNew/TBrain-ETF)、[連丞宥](https://github.com/littlelienpeanut/ETF_prediction)、[曾翊銘](https://github.com/jason890088/-ETF-)
 
 ## 摘要
 本次比賽使用特徵除了從主辦方提供的資料集中計算KDJ技術指標、行為偵測指標、也將原始價格資料進行標準化、同時抓取三大法人交易資料標準化後當成特徵。
@@ -43,14 +43,19 @@
 取所有模型在過去test的得分能力，作為權重，合併出最後的預測結果。
 
 ## 訓練方式及原始碼
--	[Simple LSTM-1](https://github.com/littlelienpeanut/ETF_prediction): 
+-	[Simple LSTM-1](https://github.com/littlelienpeanut/ETF_prediction):
 原始碼包含資料前處理部分(步驟為README.md)以etf_pred_value.py(預測股價)、etf_ud_pred.py(預測漲跌)兩部分。
 -	[Simple LSTM-2(v1)](https://github.com/NepTuNew/TBrain-ETF/tree/master/v1):
 這部分只使用了ETF-18的資料，將資料透過前處理，處理成差值，一個input data由時間序列所組成的5個維度(開/高/低/收/成交量)的資料，假如timeStep為5，那則需要6天的歷史資料來處理成各維度的差值，再丟到神經網路中訓練。
 -	[Attention-Based LSTM(v2)](https://github.com/NepTuNew/TBrain-ETF/tree/master/v2):
 這部分使用了ETF-18之外還有對應的三大法人資料，三大法人經過處理後為6個維度的資料，加上原本的5個維度，一樣處理成差值，所以這個版本的輸入會是一個11個維度的時間序列，再丟到神經網路中訓練。
--	CNN:
+-	[CNN](https://github.com/jason890088/-ETF-):
 原始碼包含資料前處理部分(data_processing_r)以及模型訓練與預測(model_pre)，與用於模型合成的結果整理(merge_result_shift)。
 -	[Multi-Task Learning, Convolutional-LSTM, Residual Convolutional-LSTM](https://github.com/Ray941216/TBrainETF/tree/master/TBrain):
 讀取pre-trained base 對每檔股票近一年的資料各自fine tune 幾個epoch 後，預測並輸出結果與local model參數作為次週預測的pre-trained base。
 -	[Ensemble Learning](https://github.com/Ray941216/TBrainETF/tree/master/Ensemble)
+
+## 結論
+短期股價預測，若在新聞較少以及世界總體經濟穩定的情況下，是可以預測的，但若在世界總體經濟不穩定的區間，僅透過歷史價格是無法預測的。
+本次比賽正式計分的區間正是後者，每一日的波動，都受到前日新聞影響，同時過去也沒有出現過多次的事件，對於模型來說是無法進行預測的。
+最終比賽就變成了比運氣的比賽了。
